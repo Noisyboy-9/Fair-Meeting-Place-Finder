@@ -32,8 +32,18 @@ def start_program_loop(graph: Graph) -> None:
             pass
 
         if command == 'test':
-            graph.handle_test()
-            
+            visited = set()
+            # setting first added vertex for the starting point, it can be another vertex
+            start = graph.vertices[0]
+            graph.dfs_print(visited, start)
+
+        if command == 'calculate':
+            pass
+
+
+def print_node(current_node: str):
+    print(current_node)
+
 
 def main():
     graph = create_graph()

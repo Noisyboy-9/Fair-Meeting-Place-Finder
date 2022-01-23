@@ -21,6 +21,10 @@ class Graph:
 
         self.__starting_points.append(starting_point)
 
+    @property
+    def vertices(self):
+        return self.__vertices
+
     def handle_test(self):
         visited = set()
         start = self.__vertices[0]
@@ -28,7 +32,7 @@ class Graph:
 
     def dfs_print(self, visited: set, current_node: str):
         if current_node not in visited:
-            print(current_node, end = " ")
+            print()
             visited.add(current_node)
             for edge in self.__adjacency_list[current_node]:
                 neighbor_vertex, weight = edge[0], edge[1]
