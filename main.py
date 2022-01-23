@@ -32,8 +32,8 @@ def start_program_loop(graph: Graph) -> None:
             pass
 
         if command == 'test':
-            pass
-
+            graph.handle_test()
+            
 
 def main():
     graph = create_graph()

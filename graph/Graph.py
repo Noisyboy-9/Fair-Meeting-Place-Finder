@@ -20,3 +20,16 @@ class Graph:
             raise ValueError(f"The starting point, {starting_point}, already exist in the graph")
 
         self.__starting_points.append(starting_point)
+
+    def handle_test(self):
+        visited = set()
+        start = self.__vertices[0]
+        self.dfs_print(visited, start)
+
+    def dfs_print(self, visited: set, current_node: str):
+        if current_node not in visited:
+            print(current_node, end = " ")
+            visited.add(current_node)
+            for edge in self.__adjacency_list[current_node]:
+                neighbor_vertex, weight = edge[0], edge[1]
+                self.dfs_print(visited, neighbor_vertex)
