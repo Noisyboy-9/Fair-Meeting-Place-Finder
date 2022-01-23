@@ -17,18 +17,24 @@ class Graph:
 
     def add_starting_point(self, starting_point: str):
         if starting_point in self.__starting_points:
-            raise ValueError(f"The starting point, {starting_point}, already exist in the graph")
+            raise ValueError(f"The starting point, {starting_point}, is duplicate can't!")
+
+        if starting_point not in self.__vertices:
+            raise ValueError(
+                f"starting point must be a vertex on the graph, the graph doesn't have vertex equal to {starting_point}"
+            )
 
         self.__starting_points.append(starting_point)
+
+    def remove_starting_point(self, starting_point: str):
+        if starting_point not in self.__starting_points:
+            raise ValueError(f"starting point: {starting_point} isn't declared before!")
+
+        self.__starting_points.remove(starting_point)
 
     @property
     def vertices(self):
         return self.__vertices
-
-    def handle_test(self):
-        visited = set()
-        start = self.__vertices[0]
-        self.dfs_print(visited, start)
 
     def dfs_print(self, visited: set, current_node: str):
         if current_node not in visited:

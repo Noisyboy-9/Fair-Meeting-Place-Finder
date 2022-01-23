@@ -26,10 +26,10 @@ def start_program_loop(graph: Graph) -> None:
             break
 
         if command == 'join':
-            pass
+            graph.add_starting_point(arguments[0])
 
         if command == 'left':
-            pass
+            graph.remove_starting_point(arguments[0])
 
         if command == 'test':
             visited = set()
