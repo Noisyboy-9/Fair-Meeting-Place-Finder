@@ -79,6 +79,9 @@ class Graph:
         return distances
 
     def handle_calculate_command(self):
+        if len(self.__starting_points) == 0:
+            return "No starting points can't do any calculations!"
+
         dijkstra_results = {starting_point: self.dijkstra(starting_point) for starting_point in self.__starting_points}
         possible_places = list(set(self.__vertices).difference(self.__starting_points))
         scores = {}
@@ -86,10 +89,19 @@ class Graph:
         for place in possible_places:
             scores[place] = self.calculate_fair_score(place, dijkstra_results)
 
-        return min(scores, key = scores.get)
+        min_value = min(scores.values())
+        return [key for key, value in scores.items() if value == min_value]
 
     def calculate_fair_score(self, calculation_target, dijkstra_results):
         score = 0
+
+        if len(self.__starting_points) == 2:
+            first, second = self.__starting_points
+
+            first_distance = dijkstra_results[first][calculation_target]
+            last_distance = dijkstra_results[second][calculation_target]
+
+            return math.fabs(first_distance - last_distance)
 
         for point in self.__starting_points:
             score += dijkstra_results[point][calculation_target]
