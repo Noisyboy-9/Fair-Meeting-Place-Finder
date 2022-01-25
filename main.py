@@ -1,4 +1,5 @@
 from graph.Graph import Graph
+from handler import Handler
 
 
 def create_graph() -> Graph:
@@ -19,26 +20,28 @@ def create_graph() -> Graph:
 
 
 def start_program_loop(graph: Graph) -> None:
+    handler = Handler(graph)
+
     while True:
-        command, *arguments = input().strip().split(' ')
+        command, *arguments = input("Please enter your command:\t").strip().split(' ')
 
         if command == 'exit':
             break
 
         if command == 'join':
-            graph.add_starting_point(arguments[0])
+            handler.join_command(arguments)
 
         if command == 'left':
-            graph.remove_starting_point(arguments[0])
+            handler.left_command(arguments)
 
         if command == 'test':
-            visited = set()
-            # setting first added vertex for the starting point, it can be another vertex
-            start = graph.vertices[0]
-            graph.dfs_print(visited, start)
+            handler.test_command()
 
         if command == 'calculate':
-            print(graph.handle_calculate_command())
+            handler.calculate_command()
+
+        if command == 'help':
+            handler.help_command()
 
 
 def print_node(current_node: str):
