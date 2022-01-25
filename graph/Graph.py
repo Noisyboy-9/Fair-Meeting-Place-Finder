@@ -77,3 +77,21 @@ class Graph:
                     distances[neighbor] = current_distance
 
         return distances
+
+    def handle_calculate_command(self):
+        dijkstra_results = {starting_point: self.dijkstra(starting_point) for starting_point in self.__starting_points}
+        possible_places = list(set(self.__vertices).difference(self.__starting_points))
+        scores = {}
+
+        for place in possible_places:
+            scores[place] = self.calculate_fair_score(place, dijkstra_results)
+
+        return min(scores, key = scores.get)
+
+    def calculate_fair_score(self, calculation_target, dijkstra_results):
+        score = 0
+
+        for point in self.__starting_points:
+            score += dijkstra_results[point][calculation_target]
+
+        return score / len(self.__starting_points)

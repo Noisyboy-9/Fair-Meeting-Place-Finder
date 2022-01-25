@@ -38,7 +38,7 @@ def start_program_loop(graph: Graph) -> None:
             graph.dfs_print(visited, start)
 
         if command == 'calculate':
-            pass
+            print(graph.handle_calculate_command())
 
 
 def print_node(current_node: str):
