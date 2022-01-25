@@ -48,6 +48,14 @@ class Graph:
         self.__starting_points.remove(starting_point)
 
     @property
+    def starting_points(self):
+        return self.__starting_points
+
+    @property
+    def adjacency_list(self):
+        return self.__adjacency_list
+
+    @property
     def vertices(self):
         return self.__vertices
 
@@ -77,20 +85,6 @@ class Graph:
                     distances[neighbor] = current_distance
 
         return distances
-
-    def handle_calculate_command(self):
-        if len(self.__starting_points) == 0:
-            return "No starting points can't do any calculations!"
-
-        dijkstra_results = {starting_point: self.dijkstra(starting_point) for starting_point in self.__starting_points}
-        possible_places = list(set(self.__vertices).difference(self.__starting_points))
-        scores = {}
-
-        for place in possible_places:
-            scores[place] = self.calculate_fair_score(place, dijkstra_results)
-
-        min_value = min(scores.values())
-        return [key for key, value in scores.items() if value == min_value]
 
     def calculate_fair_score(self, calculation_target, dijkstra_results):
         score = 0
