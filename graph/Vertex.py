@@ -2,6 +2,15 @@ class Vertex:
     def __init__(self, key: str) -> None:
         super().__init__()
         self.__key = key
+        self.__dijkstra_result = {}
+
+    @property
+    def dijkstra_result(self):
+        return self.__dijkstra_result
+
+    @dijkstra_result.setter
+    def dijkstra_result(self, result: dict):
+        self.__dijkstra_result = result
 
     @property
     def key(self):

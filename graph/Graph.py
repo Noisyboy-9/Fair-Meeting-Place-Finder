@@ -21,6 +21,18 @@ class Graph:
         self.__adjacency_list = {}
         self.__starting_points = []  # type: list[Vertex]
 
+    @property
+    def starting_points(self):
+        return self.__starting_points
+
+    @property
+    def adjacency_list(self):
+        return self.__adjacency_list
+
+    @property
+    def vertices(self):
+        return self.__vertices
+
     def add_vertex(self, vertex: Vertex):
         if vertex in self.__vertices:
             raise ValueError(f"Can't add duplicate vertex key. Vertex with key = {vertex.key} already exist")
@@ -42,24 +54,13 @@ class Graph:
             )
 
         self.__starting_points.append(start)
+        start.dijkstra_result = self.dijkstra(start)
 
-    def remove_starting_point(self, vertex: Vertex):
-        if vertex not in self.__starting_points:
-            raise ValueError(f"starting point: {vertex.key} isn't declared before!")
-
-        self.__starting_points.remove(vertex)
-
-    @property
-    def starting_points(self):
-        return self.__starting_points
-
-    @property
-    def adjacency_list(self):
-        return self.__adjacency_list
-
-    @property
-    def vertices(self):
-        return self.__vertices
+    def remove_starting_point(self, remove_target: Vertex):
+        if remove_target not in self.__starting_points:
+            raise ValueError(f"starting point: {remove_target.key} isn't declared before!")
+        self.__starting_points.remove(remove_target)
+        remove_target.dijkstra_result = {}
 
     def dfs_print(self, visited: set, current_node: Vertex):
         if current_node not in visited:
