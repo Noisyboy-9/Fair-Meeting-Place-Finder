@@ -1,7 +1,9 @@
 import math
 
+from graph.Vertex import Vertex
 
-def unvisited_node_with_smallest_distance(not_visited_node: list, distances: dict) -> str:
+
+def unvisited_node_with_smallest_distance(not_visited_node: list, distances: dict) -> Vertex:
     result = not_visited_node[0]  # type: str
     result_distance = distances[result]  # type: int
 
@@ -15,37 +17,37 @@ def unvisited_node_with_smallest_distance(not_visited_node: list, distances: dic
 
 class Graph:
     def __init__(self) -> None:
-        self.__vertices = []
+        self.__vertices = []  # type: list[Vertex]
         self.__adjacency_list = {}
-        self.__starting_points = []
+        self.__starting_points = []  # type: list[Vertex]
 
-    def add_vertex(self, vertex_key: str):
-        if vertex_key in self.__vertices:
-            raise ValueError(f"Can't add duplicate vertex key. Vertex with key = {vertex_key} already exist")
+    def add_vertex(self, vertex: Vertex):
+        if vertex in self.__vertices:
+            raise ValueError(f"Can't add duplicate vertex key. Vertex with key = {vertex.key} already exist")
 
-        self.__vertices.append(vertex_key)
-        self.__adjacency_list[vertex_key] = []
+        self.__vertices.append(vertex)
+        self.__adjacency_list[vertex] = []
 
-    def add_edge(self, vertex1: str, vertex2: str, weight: int):
+    def add_edge(self, vertex1: Vertex, vertex2: Vertex, weight: int):
         self.__adjacency_list[vertex1].append([vertex2, weight])
         self.__adjacency_list[vertex2].append([vertex1, weight])
 
-    def add_starting_point(self, starting_point: str):
-        if starting_point in self.__starting_points:
-            raise ValueError(f"The starting point, {starting_point}, is duplicate can't!")
+    def add_starting_point(self, start: Vertex):
+        if start in self.__starting_points:
+            raise ValueError(f"The starting point, {start.key}, is duplicate can't!")
 
-        if starting_point not in self.__vertices:
+        if start not in self.__vertices:
             raise ValueError(
-                f"starting point must be a vertex on the graph, the graph doesn't have vertex equal to {starting_point}"
+                f"starting point must be a vertex on the graph, the graph doesn't have vertex equal to {start.key}"
             )
 
-        self.__starting_points.append(starting_point)
+        self.__starting_points.append(start)
 
-    def remove_starting_point(self, starting_point: str):
-        if starting_point not in self.__starting_points:
-            raise ValueError(f"starting point: {starting_point} isn't declared before!")
+    def remove_starting_point(self, vertex: Vertex):
+        if vertex not in self.__starting_points:
+            raise ValueError(f"starting point: {vertex.key} isn't declared before!")
 
-        self.__starting_points.remove(starting_point)
+        self.__starting_points.remove(vertex)
 
     @property
     def starting_points(self):
@@ -59,15 +61,20 @@ class Graph:
     def vertices(self):
         return self.__vertices
 
-    def dfs_print(self, visited: set, current_node: str):
+    def dfs_print(self, visited: set, current_node: Vertex):
         if current_node not in visited:
-            print()
+            if len(visited) == len(self.__vertices) - 1:
+                # last node to visit put a line break at the end
+                print(current_node.key)
+            else:
+                print(current_node.key, end = " ")
+
             visited.add(current_node)
             for edge in self.__adjacency_list[current_node]:
                 neighbor_vertex, weight = edge[0], edge[1]
                 self.dfs_print(visited, neighbor_vertex)
 
-    def dijkstra(self, start: str) -> dict:
+    def dijkstra(self, start: Vertex) -> dict:
         distances = {vertex: math.inf for vertex in self.__vertices}
         distances[start] = 0
 
