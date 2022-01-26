@@ -1,4 +1,5 @@
 from graph.Graph import Graph
+from graph.Vertex import Vertex
 
 
 class Handler:
@@ -6,10 +7,10 @@ class Handler:
         self.__graph = graph  # type: Graph
 
     def join_command(self, arguments):
-        self.__graph.add_starting_point(arguments[0])
+        self.__graph.add_starting_point(Vertex(arguments[0]))
 
     def left_command(self, arguments):
-        self.__graph.remove_starting_point(arguments[0])
+        self.__graph.remove_starting_point(Vertex(arguments[0]))
 
     def test_command(self):
         self.__graph.dfs_print(set(), self.__graph.vertices[0])
@@ -23,8 +24,11 @@ class Handler:
             print("All the vertices has been declared as starting point! Justice is a dream ! :)")
             return
 
+        if len(self.__graph.starting_points) == 1:
+            print("You are to alone to go out! Sit at home and hope for better days :) ")
+            return
         dijkstra_results = {
-            starting_point: self.__graph.dijkstra(starting_point) for starting_point in self.__graph.starting_points
+            starting_point: starting_point.dijkstra_result for starting_point in self.__graph.starting_points
         }
         possible_places = list(set(self.__graph.vertices).difference(self.__graph.starting_points))
         scores = {}
@@ -33,7 +37,7 @@ class Handler:
             scores[place] = self.__graph.calculate_fair_score(place, dijkstra_results)
 
         min_value = min(scores.values())
-        print([key for key, value in scores.items() if value == min_value])
+        print([vertex.key for vertex, value in scores.items() if value == min_value])
 
     def help_command(self):
         print("Commands:")
@@ -41,6 +45,3 @@ class Handler:
         print("2. left")
         print("3. test")
         print("4. calculate")
-
-
-

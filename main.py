@@ -1,4 +1,5 @@
 from graph.Graph import Graph
+from graph.Vertex import Vertex
 from handler import Handler
 
 
@@ -9,12 +10,13 @@ def create_graph() -> Graph:
 
     # adding the vertices
     for key in vertices_string_array:
-        graph.add_vertex(key)
+        vertex = Vertex(key)
+        graph.add_vertex(vertex)
 
     # adding the edges
     for i in range(number_of_edges):
         source, destination, weight_str = input().strip().split(' ')
-        graph.add_edge(source, destination, int(weight_str))
+        graph.add_edge(Vertex(source), Vertex(destination), int(weight_str))
 
     return graph
 
