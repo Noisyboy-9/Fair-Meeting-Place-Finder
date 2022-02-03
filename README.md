@@ -21,9 +21,13 @@ In this course I learnt about:
   - Dijkstra 
   - Kruskal  
 <br>
+
 ## Project Description
+
 Some [AUT](https://aut.ac.ir) students are trying to schedule a meeting and they are trying to find a suitable place for the meeting to take place, which each of them will travel the least distance possible. This program tries to calculate the best meeting point for them based on where they are.<br>
+
 ### input
+
 The city the meeting is taking place has to be modeled using a graph. <br>
 In the first line of input `vertices count` and `edges count` will be given.
 in the `edges count` line after this the edges will be described and their weight.
@@ -36,7 +40,9 @@ sample input:
 7 20 1 
 1 20 5
 ```
+
 ### commands
+
 This program is a CLI tool and has some commands to manage the program:
 - join: when a person joins the group and wants to meet with others
   usage:
@@ -68,4 +74,3 @@ This program is a CLI tool and has some commands to manage the program:
   ```
   exit
   ```
-  
