@@ -1,4 +1,4 @@
-# Fair Meeting place finder 
+# Fair Meeting Place Finder 
 In Fall 2022 I selected course data structures and algorithms under supervision of [Dr.Nazerfard](https://scholar.google.com/citations?user=Cl5tre8AAAAJ&hl=en). <br>
 In this course I learnt about: 
 - Asymptotic analysis
@@ -26,7 +26,7 @@ In this course I learnt about:
 
 Some [AUT](https://aut.ac.ir) students are trying to schedule a meeting and they are trying to find a suitable place for the meeting to take place, which each of them will travel the least distance possible. This program tries to calculate the best meeting point for them based on where they are.<br>
 
-### input
+### Input
 
 The city the meeting is taking place has to be modeled using a graph. <br>
 In the first line of input `vertices count` and `edges count` will be given. <br>
@@ -41,7 +41,7 @@ sample input:
 1 20 5
 ```
 
-### commands
+### Commands
 
 This program is a CLI tool and has some commands to manage the program:
 - join: when a person joins the group and wants to meet with others
