@@ -29,8 +29,8 @@ Some [AUT](https://aut.ac.ir) students are trying to schedule a meeting and they
 ### input
 
 The city the meeting is taking place has to be modeled using a graph. <br>
-In the first line of input `vertices count` and `edges count` will be given.
-in the `edges count` line after this the edges will be described and their weight.
+In the first line of input `vertices count` and `edges count` will be given. <br>
+In the `edges count` line after this the edges will be described and their weight.
 sample input:
 ```
 5 4
