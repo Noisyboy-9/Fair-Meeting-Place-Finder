@@ -70,7 +70,7 @@ This program is a CLI tool and has some commands to manage the program:
     help
     ```
  - exit: Exit and finish the program execution.
-  usage:
-  ```
-  exit
-  ```
+    usage:
+    ```
+    exit
+    ```
